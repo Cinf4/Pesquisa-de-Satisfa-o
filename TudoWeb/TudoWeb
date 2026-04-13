@@ -1,0 +1,81 @@
+"""
+Sistema de Pesquisa de Satisfação - TudoWeb
+"""
+
+def exibir_cabecalho():
+    """Exibe o cabeçalho do sistema de forma formatada."""
+    print("=" * 45)
+    print(f"{'PESQUISA DE SATISFAÇÃO - TUDOWEB':^45}")
+    print("=" * 45)
+
+def validar_idade(mensagem):
+    """Garante que o usuário digite uma idade numérica válida."""
+    while True:
+        try:
+            idade = int(input(mensagem))
+            if idade < 0 or idade > 120:
+                print("-> Atenção: Por favor, digite uma idade válida.")
+            else:
+                return idade
+        except ValueError:
+            print("-> Erro: Digite apenas números inteiros para a idade.")
+
+def validar_opiniao(mensagem):
+    """Garante que o usuário escolha apenas as opções 1, 2 ou 3."""
+    while True:
+        print("\n[ 1 ] EXCELENTE")
+        print("[ 2 ] BOM")
+        print("[ 3 ] RUIM")
+        try:
+            opiniao = int(input(mensagem))
+            if opiniao in [1, 2, 3]:
+                return opiniao
+            else:
+                print("-> Opção inválida. Escolha 1, 2 ou 3.")
+        except ValueError:
+            print("-> Erro: Digite apenas os números correspondentes ao menu.")
+
+def main():
+    TOTAL_ENTREVISTADOS = 50
+
+    # Variáveis contadoras
+    qtd_excelente = 0
+    qtd_bom = 0
+    qtd_ruim = 0
+
+    exibir_cabecalho()
+
+    # REQUISITO: Estrutura de repetição FOR
+    for i in range(1, TOTAL_ENTREVISTADOS + 1):
+        print(f"\n--- Coletando dados: Entrevistado {i}/{TOTAL_ENTREVISTADOS} ---")
+        
+        # Coleta de dados
+        nome = input("Digite o nome: ").strip().title()
+        idade = validar_idade("Digite a idade: ")
+        opiniao = validar_opiniao("Qual a sua opinião sobre o atendimento? ")
+
+        # REQUISITO: Estrutura de decisão (If/Elif)
+        if opiniao == 1:
+            qtd_excelente += 1
+        elif opiniao == 2:
+            qtd_bom += 1
+        elif opiniao == 3:
+            qtd_ruim += 1
+
+    # Exibição dos resultados finais
+    print("\n" + "=" * 45)
+    print(f"{'RESULTADO FINAL DA PESQUISA':^45}")
+    print("=" * 45)
+    
+    # REQUISITOS a) e b)
+    print(f"a) Quantidade de respostas 'EXCELENTE': {qtd_excelente}")
+    print(f"b) Quantidade de respostas 'RUIM': {qtd_ruim}")
+    
+    # Adicional para manter o relatório completo e coerente
+    print(f"-> Quantidade de respostas 'BOM': {qtd_bom}")
+    print(f"-> Total de participantes: {TOTAL_ENTREVISTADOS}")
+    print("=" * 45)
+
+# Ponto de entrada do script
+if __name__ == "__main__":
+    main()
